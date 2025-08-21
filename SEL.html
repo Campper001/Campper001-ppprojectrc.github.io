@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPTCAS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="salM.js"></script>
+    <script defer src="calm.js"></script>
+    
+    <style>
+        @layer utilities {
+          .text-stroke {
+              text-shadow: 
+                -1px -1px 0 #000,  
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+          }
+          .min div.block {
+              background-color: #f0f4f8;
+              padding: 8px;
+              margin-top: 4px;
+              border-left: 4px solid #f97316;
+          }
+          .CONdi div.block {
+              background-color: #f0f4f8;
+              padding: 8px;
+              margin-top: 4px;
+              border-left: 4px solid #f97316;
+          }
+          .CORE div.block {
+              background-color: #f0f4f8;
+              padding: 8px;
+              margin-top: 4px;
+              border-left: 4px solid #f97316;
+          }
+           .custom-td {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            grid-template-rows: repeat(2);
+            height: 100%;
+        }
+           .top-content {
+            font-weight: bold;
+            font-size: 1rem; /* ปรับขนาดตัวเลขให้ใหญ่ */
+            color: #f97316; /* สีส้มเหมือนในภาพ */
+        }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-4 right-4 bg-orange-500 text-white p-3 rounded-full shadow-lg hover:bg-orange-600 transition">
+        <img src="img/goup.svg" alt="Scroll to Top" class="w-6 h-6">
+    </button>
+    
+    <div id="calBox" class="cal pb-5">
+        <div class="mx-auto max-w-lg rounded-lg bg-white p-6 shadow-lg">
+            <div class="mb-4 flex items-center justify-between">
+                <h2 class="rounded-md bg-red-400 p-2 text-lg font-bold text-black">Score_Admission</h2>
+                <a href="index.html">
+                    <img class="bg-red-500 rounded" src="img/main.svg" alt="">
+                </a>
+            </div>
+
+            <!-- เริ่ม: เนื้อหาที่จะถูกย่อ/ขยาย -->
+            <div id="calContent">
+                <p class="mb-4 text-xs text-gray-500">*กรุณากรอกเป็น T-Score</p>
+                <p class="opacity-65 mb-5 sm:hidden">- - - - - - - - - - - - - - - - - -  - - - - - - - - -</p>
+                <p class="opacity-65 mb-5 hidden sm:block">- - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - -</p>
+
+                <!-- GPAX -->
+                <div class="mb-4">
+                    <label for="gpx" class="block font-bold text-xl underline text-orange-600">GPAX</label>
+                    <p class="text-gray-500 opacity-65 pb-2 text-xs pt-0.5">สูงสุด 4.00*</p>
+                    <input type="number" id="ingpx" step="0.01" max="4.00" min="0.00" placeholder="4.00" class="peer w-1/2 rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                </div>
+
+                <p class="opacity-65 mb-5 sm:hidden">- - - - - - - - - - - - - - - - - -  - - - - - - - - -</p>
+                <p class="opacity-65 mb-5 hidden sm:block">- - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - -</p>
+
+                <!-- TGAT -->
+                <div class="mb-4">
+                    <label class="block font-bold text-xl underline text-orange-600">TGAT ความถนัดทั่วไป</label>
+                    <div class="text-gray-500 opacity-65 pb-2 text-xs pt-0.5"><p>คะแนนเต็ม 100 คะแนน/พาร์ท*</p></div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label for="Tgat1" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TGAT1-อังกฤษ</label>
+                            <input type="number" id="inTgat1" placeholder="100.00" class= "block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="Tgat2" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TGAT2-คิดเหตุผล</label>
+                            <input type="number" id="inTgat2" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="Tgat3" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TGAT3-สมรรถนะ</label>
+                            <input type="number" id="inTgat3" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                    </div>
+                </div>
+
+                <p class="opacity-65 mb-5 sm:hidden">- - - - - - - - - - - - - - - - - -  - - - - - - - - -</p>
+                <p class="opacity-65 mb-5 hidden sm:block">- - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - -</p>
+
+                <!-- TPAT -->
+                <div class="mb-4">
+                    <label class="block font-bold text-xl underline text-orange-600">TPAT 1-5 ความถนัดเฉพาะทาง</label>
+                    <div class="text-gray-500 opacity-65 pb-2 text-xs pt-0.5"><p>คะแนนเต็ม 100 คะแนน/พาร์ท*</p></div>
+                    <div class="grid grid-cols-3 gap-2 gap-y-4">
+                        <div>
+                            <label for="Tpat1" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TPAT1-เชาว์</label>
+                            <input type="number" id="inTpat1" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="Tpat12" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TPAT1.2-จริยธรรม</label>
+                            <input type="number" id="inTpat12" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="Tpat13" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TPAT1.3-เชื่อมโยง</label>
+                            <input type="number" id="inTpat13" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="Tpat21" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TPAT2.1-ทัศนศิลป์</label>
+                            <input type="number" id="inTpat21" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="Tpat22" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TPAT2.2-ดนตรี</label>
+                            <input type="number" id="inTpat22" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="Tpat23" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TPAT2.3-นาฏศิลป์</label>
+                            <input type="number" id="inTpat23" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="Tpat3" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TPAT3-วิทย์-วิศวฯ</label>
+                            <input type="number" id="inTpat3" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="Tpat4" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TPAT4-สถาปัตย์</label>
+                            <input type="number" id="inTpat4" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="Tpat5" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TPAT5-ครู</label>
+                            <input type="number" id="inTpat5" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                    </div>
+                </div>
+
+                <p class="opacity-65 mb-5 sm:hidden">- - - - - - - - - - - - - - - - - -  - - - - - - - - -</p>
+                <p class="opacity-65 mb-5 hidden sm:block">- - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - -</p>
+
+                <!-- A-Level -->
+                <div class="mb-4">
+                    <label class="block font-bold text-xl underline text-orange-600">A-Level</label>
+                    <div class="text-gray-500 opacity-65 pb-2 text-xs"><p>คะแนนเต็ม 100 คะแนน/พาร์ท*</p></div>
+                    <div class="grid grid-cols-3 gap-2 gap-y-4">
+                        <div>
+                            <label for="AL1" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-คณิต1</label>
+                            <input type="number" id="inAL1" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="AL2" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-คณิต2</label>
+                            <input type="number" id="inAL2" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="ALsci" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-วิทย์ประยุกต์</label>
+                            <input type="number" id="inALsci" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="ALphy" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-ฟิสิกส์</label>
+                            <input type="number" id="inALphy" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="ALchm" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-เคมี</label>
+                            <input type="number" id="inALchm" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="ALbio" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-ชีววิทยา</label>
+                            <input type="number" id="inALbio" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="ALscd" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-สังคมศึกษา</label>
+                            <input type="number" id="inALscd" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="ALthi" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-ภาษาไทย</label>
+                            <input type="number" id="inALthi" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="ALeng" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-อังกฤษ</label>
+                            <input type="number" id="inALeng" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="ALfan" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-ฝรั่งเศส</label>
+                            <input type="number" id="inALfan" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="ALger" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-เยอรมัน</label>
+                            <input type="number" id="inALger" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="ALjap" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-ญี่ปุ่น</label>
+                            <input type="number" id="inALjap" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="ALkor" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-เกาหลี</label>
+                            <input type="number" id="inALkor" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="ALchi" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-จีน</label>
+                            <input type="number" id="inALchi" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="ALbai" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-บาลี</label>
+                            <input type="number" id="inALbai" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="ALsph" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">A-Level-สเปน</label>
+                            <input type="number" id="inALsph" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                    </div>
+                </div>
+
+                <p class="opacity-65 mb-5 sm:hidden">- - - - - - - - - - - - - - - - - -  - - - - - - - - -</p>
+                <p class="opacity-65 mb-5 hidden sm:block">- - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - -</p>
+
+                <div class="flex m-4">
+                  <button onclick="savedata()" class="w-full rounded-md bg-green-700 py-2 text-white hover:bg-green-600 duration-300 mx-2">บันทึก</button>
+                  <button onclick="setdata()" class="w-full rounded-md bg-red-700 py-2 text-white hover:bg-red-600 duration-300 mx-2">รีเซ็ท</button>
+                </div>
+            </div>
+            <!-- ปุ่มย่อ -->
+            <div class="small text-xs flex justify-center pt-5 cursor-pointer">
+                <p onclick="toggleCal()">ย่อหน้าต่าง 🠕</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-lg mx-auto bg-white p-6 shadow-lg">
+        <div class="bg-orange-900 text-white py-2 px-4 rounded-t-md font-bold">
+            เลือกโปรแกรมคำนวณที่ต้องการ
+        </div>
+        <div class="mt-4">
+            <form id="UNform" method="POST" action="">
+                <!-- Dropdown for University -->
+                <div class="mt-4">
+                    <label class="block font-medium text-xs">เลือกมหาวิทยาลัย:</label>
+                    <select id="UN" name="UN" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-orange-500">\
+                        <option value="" disabled selected>-- เลือกมหาวิทยาลัย --</option>
+                        <option value="NU">มหาวิทยาลัยนเรศวร</option>
+                        <!-- เพิ่มตัวเลือกมหาวิทยาลัยตามต้องการ -->
+                    </select>
+                </div>
+
+                <!-- Select for FA_cla -->
+                <div class="mb-4 mt-4">
+                    <label for="FA_cla" class="block font-medium text-xs">เลือกคณะที่สนใจ:</label>
+                    <button type="button" id="facultyButton" class="w-full p-2 border border-gray-300 rounded-md bg-gray-200 text-gray-700" onclick="openModal()">
+                        เลือกคณะ
+                    </button>
+                    <input type="hidden" name="FA_cla" id="selectedFA">
+                </div>
+                <button type="submit" class="w-full rounded-md bg-orange-500 py-2 text-white hover:bg-orange-600 duration-300">ส่งตรวจเช็คข้อมูล</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-lg font-semibold mb-4">เลือกคณะที่สนใจ</h2>
+            <input type="text" id="search" placeholder="ค้นหาคณะ..." class="w-full p-2 border border-gray-300 rounded-md mb-2">
+            <div class="max-h-60 overflow-y-auto border rounded-md">
+                <ul id="facultyList" class="p-2">
+                </ul>
+            </div>
+            <button class="mt-4 bg-red-500 text-white px-4 py-2 rounded-md w-full" onclick="closeModal()">ปิด</button>
+        </div>
+    </div>
+    
+    <div id="GG" class="max-w-lg mx-auto bg-white p-6 shadow-lg mt-5 rounded-lg w-auto hidden">
+        <div class="header flex items-start justify-between">
+            <div class="logo bg-gray-200 rounded-lg w-fit px-3 py-1 mr-0.5 sm:mr-2">
+                <div class="flex items-center mb-1">
+                    <img class="w-8 h-8 mr-3 bg-white rounded-full" id="UNLogo" src="" alt="">
+                    <h1 id="UNname" class="font-bold text-[12px] sm:text-[15px]"></h1>
+                </div>
+                <div>
+                    <h1 id="FAsel" class="text-[10px] sm:text-[14px] text-gray-700"></h1>
+                </div>
+            </div>
+            <div class="score">
+                <div class="w-20 h-20 bg-green-500 rounded-lg border-2 border-orange-500 mt-1.5">
+                    <div class="block text-center items-center mt-1.5">
+                        <h2 class="text-[12px] font-bold text-black">คะแนน</h2>
+                        <h1 class="text-lg font-bold text-red-500 text-stroke" id="SCX"></h1>
+                        <h2 class="text-xs font-bold text-black">เต็ม 100</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tr mt-4">
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="border p-2 text-xs font-bold">ปี</th>
+                        <th class="border p-2 text-xs font-bold">รอบประมวล</th>
+                        <th class="border p-2 text-xs font-bold">สูงสุด</th>
+                        <th class="border p-2 text-xs font-bold">ต่ำสุด</th>
+                        <th class="border p-2 text-xs font-bold">ยอดรับ</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-gray-100 border p-2 text-xs font-bold text-center">
+                    <!-- 68 -->
+                   <tr>
+                        <td class="border p-2" rowspan="2">68</td>
+                        <td class="border p-2 text-orange-500 font-semibold">รอบ 1</td>
+                        <td id="mx1_68" class="border p-2">N/A</td>
+                        <td id="mi1_68" class="border p-2">N/A</td>
+                        <td id="rec_68" class="border p-2" rowspan="2">N/A</td>
+                    </tr>
+                    <tr>
+                        <td class="border p-2 text-orange-500 font-semibold">รอบ 2</td>
+                        <td id="mx2_68" class="border p-2">N/A</td>
+                        <td id="mi2_68" class="border p-2">N/A</td>
+                    </tr>
+                    <!-- 67 -->
+                    <tr>
+                        <td class="border p-2" rowspan="2">67</td>
+                        <td class="border p-2 text-orange-500 font-semibold">รอบ 1</td>
+                        <td id="mx1" class="border p-2"></td>
+                        <td id="mi1" class="border p-2"></td>
+                        <td class="border p-2" id="rec" rowspan="2">NULL</td>
+                    </tr>
+                    <tr>
+                        <td class="border p-2 text-orange-500 font-semibold">รอบ 2</td>
+                        <td id="mx2" class="border p-2"></td>
+                        <td id="mi2" class="border p-2"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="min mt-4 bg-gray-100 p-4 rounded-md ">
+            <div class="flex justify-between items-center">
+                 <h3 class="font-bold text-lg text-red-600 ">สูตรการคำนวณคะแนน</h3>
+                 <p class="CLS w-8 cursor-pointer"> 
+                    <img id="iconToggle" src="img/ARDW.svg" alt="">
+                </p>
+            </div >
+                <div id="min">
+                    <div id="gpx_weg"   class="hidden text-xs text-gray-700 bg-white  rounded-md ">คะแนนผลการเรียน {{gpx}} %</div>
+                    <div id="Tgat1_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">TGAT {Tgat} %</div>
+                    <div id="Tgat_weg"  class="hidden text-xs text-gray-700 bg-white  rounded-md ">TGAT1-อังกฤษ {Tgat1} %</div>
+                    <div id="Tgat2_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">TGAT2-คิดเหตุผล {Tgat2} %</div>
+                    <div id="Tgat3_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">TGAT3-สมรรถนะ {Tgat3}%</div>
+                    <div id="Tpat1_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">TPAT1-เชาว์ {Tpat1} %</div>
+                    <div id="Tpat2_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">TPAT2-ความถนัดศิลปกรรมศาสตร์ {Tpat2} %</div>
+                    <div id="Tpat3_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">TPAT3-ความถนัดด้านวิทยาศาสตร์ เทคโนโลยีฯ {Tpat3} %</div>
+                    <div id="Tpat4_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">TPAT4-สถาปัตย์ {{Tpat4}} %</div>
+                    <div id="Tpat5_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">TPAT5-ครู {Tpat5} %</div>
+                    <div id="AL1_weg"   class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-คณิต1 {AL1} %</div>
+                    <div id="AL2_weg"   class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-คณิต2 {AL2} %</div>
+                    <div id="ALsci_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-วิทย์ทั่วไป {ALsci} %</div>
+                    <div id="ALphy_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-ฟิสิกส์ {ALphy} %</div>
+                    <div id="ALchm_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-เคมี {ALchm} %</div>
+                    <div id="ALbio_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-ชีววิทยา {ALbio} %</div>
+                    <div id="ALscd_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-สังคมศึกษา {ALscd} %</div>
+                    <div id="ALthi_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-ภาษาไทย {ALthi} %</div>
+                    <div id="ALeng_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-อังกฤษ {ALeng} %</div>
+                    <div id="ALfan_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-ฝรั่งเศส {ALfan} %</div>
+                    <div id="ALger_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-เยอรมัน {ALger} %</div>
+                    <div id="ALjap_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-ญี่ปุ่น {ALjap} %</div>
+                    <div id="ALkor_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-เกาหลี {ALkor} %</div>
+                    <div id="ALchi_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-จีน {ALchi} %</div>
+                    <div id="ALsph_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-สเปน {ALsph} %</div>
+                    <div id="ALbai_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-บาลี {ALbai} %</div>
+                    <div id="SEC_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-บาลี {ALbai} %</div>
+                    <div id="PCBE1_weg" class="hidden text-xs text-gray-700 bg-white  rounded-md ">A-Level-บาลี {ALbai} %</div>
+                </div>
+        </div>
+
+        <!-- Minimum Score Requirements -->
+        <div class="CONdi mt-4 bg-red-100 p-4 rounded-md">
+            <h3 class="font-bold text-lg text-red-600">เงื่อนไขขั้นต่ำที่ต้องใช้</h3>
+            <div id="MSGGPAX"       class="hidden text-xs text-gray-700 bg-white  rounded-md">คะแนนผลการเรียนขั้นต่ำ {GPAX}</div>
+            <div id="MSGCDM"        class="hidden text-xs text-gray-700 bg-white  rounded-md">จน.หน่วยกิตต่ำสุดกลุ่มสาระฯ คณิตศาสตร์ {GPAX}</div>
+            <div id="MSGCDS"        class="hidden text-xs text-gray-700 bg-white  rounded-md">จน.หน่วยกิตต่ำสุดกลุ่มสาระฯ วิทยาศาสตร์และเทคโนโลยี {GPAX}</div>
+            <div id="MSGCDE"        class="hidden text-xs text-gray-700 bg-white  rounded-md">จน.หน่วยกิตต่ำสุดกลุ่มสาระฯ ภาษาต่างประเทศ{GPAX}</div>
+            <div id="MSGMSTG"       class="hidden text-xs text-gray-700 bg-white  rounded-md">TGAT ขั้นต่ำ {MSTG}</div> 
+            <div id="MSGMSTG1"      class="hidden text-xs text-gray-700 bg-white  rounded-md">TGAT1-อังกฤษ ขั้นต่ำ {MSTG1}</div>
+            <div id="MSGMSTG2"      class="hidden text-xs text-gray-700 bg-white  rounded-md">TGAT2-คิดเหตุผล ขั้นต่ำ {MSTG2}</div>
+            <div id="MSGMSTG3"      class="hidden text-xs text-gray-700 bg-white  rounded-md">TGAT3-สมรรถนะ ขั้นต่ำ {MSTG3}</div>
+            <div id="MSGMSTP1"      class="hidden text-xs text-gray-700 bg-white  rounded-md">TPAT1-เชาว์ ขั้นต่ำ {MSTP1}</div>
+            <div id="MSGMSTP2"      class="hidden text-xs text-gray-700 bg-white  rounded-md">TPAT2-ความถนัดศิลปกรรมศาสตร์ {MSTP2}</div>
+            <div id="MSGMSTP3"      class="hidden text-xs text-gray-700 bg-white  rounded-md">TPAT3-ความถนัดด้านวิทยาศาสตร์ เทคโนโลยีฯ {MSTP3}</div>
+            <div id="MSGMSTP4"      class="hidden text-xs text-gray-700 bg-white  rounded-md">TPAT4-สถาปัตย์ ขั้นต่ำ {MSTP4}</div>
+            <div id="MSGMSTP5"      class="hidden text-xs text-gray-700 bg-white  rounded-md">TPAT5-ครู ขั้นต่ำ {MSTP5}</div>
+            <div id="MSGMSAMath1"   class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-คณิต1 ขั้นต่ำ {MSAMath1}</div>
+            <div id="MSGMSAMath2"   class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-คณิต2 ขั้นต่ำ {MSAMath2}</div>
+            <div id="MSGMSASci"     class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-วิทย์ทั่วไป ขั้นต่ำ {MSASci}</div> 
+            <div id="MSGMSAPhy"     class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-ฟิสิกส์ ขั้นต่ำ {MSAPhy}</div>
+            <div id="MSGMSAChe"     class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-เคมี ขั้นต่ำ {MSAChe}</div>
+            <div id="MSGMSABio"     class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-ชีววิทยา ขั้นต่ำ {MSABio}</div>
+            <div id="MSGMSASoci"    class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-สังคมศึกษา ขั้นต่ำ {MSASoci}</div>
+            <div id="MSGMSAThai"    class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-ภาษาไทย ขั้นต่ำ {MSAThai}</div>
+            <div id="MSGMSAEnglish" class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-อังกฤษ ขั้นต่ำ {MSAEnglish}</div>
+            <div id="MSGMSAFrench"  class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-ฝรั่งเศส ขั้นต่ำ {MSAFrench}</div>
+            <div id="MSGMSAGerman"  class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-เยอรมัน ขั้นต่ำ {MSAGerman}</div>
+            <div id="MSGMSAJapan"   class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-ญี่ปุ่น ขั้นต่ำ {MSAJapan}</div>
+            <div id="MSGMSAKorean"  class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-เกาหลี ขั้นต่ำ {MSAKorean}</div>
+            <div id="MSGMSAchinese" class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-จีน ขั้นต่ำ {MSAchinese}</div>
+            <div id="MSGMSASpanish" class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-สเปน ขั้นต่ำ {MSASpanish}</div>
+            <div id="MSGMSABali"    class="hidden text-xs text-gray-700 bg-white  rounded-md">A-Level-บาลี ขั้นต่ำ {MSABali}</div>
+            <div id="MSGMSIELTS"    class="hidden text-xs text-gray-700 bg-white  rounded-md">IELTS ขั้นต่ำ {MSIELTS}</div>            
+            <div id="MSGMSTOEFLIBT" class="hidden text-xs text-gray-700 bg-white  rounded-md">TOEFLIBT ขั้นต่ำ {MSTOEFLIBT}</div>
+            <div id="MSGMSTOEFLPBT" class="hidden text-xs text-gray-700 bg-white  rounded-md">TOEFLPBT ขั้นต่ำ {MSTOEFLPBT}</div>
+            <div id="MSGMSTOEFLCBT" class="hidden text-xs text-gray-700 bg-white  rounded-md">TOEFLCBT ขั้นต่ำ {MSTOEFLCBT}</div>
+            <div id="MSGMS1PCBE" class="hidden text-xs text-gray-700 bg-white  rounded-md">ผลรวม A-Level-คณิต 1 ฟิสิกส์ เคมี ชีววิทยา ภาษาอังกฤษ ขั้นต่ำ {MS1PCBE}</div>
+            <div id="MSGMSSEC" class="hidden text-xs text-gray-700 bg-white  rounded-md">ผลรวม A-Level-ฟิสิกส์ เคมี ชีวะ ขั้นต่ำ {MSSEC}</div>
+        </div>
+
+        <div class="COREEE mt-4 bg-red-100 p-4 rounded-md">
+        <h3 class="font-bold text-lg text-red-600 mb-2">สารการเรียนที่รับ</h3>
+                <div id="core" class="flex items-center space-x-2">
+                  <img src="img/check.png" alt="Check icon" class="w-4 h-4">
+                  <div class="text-xs text-gray-700 pb-0.5">ผู้สมัครที่จบจาก รร. หลักสูตรแกนกลาง</div>
+                </div>
+
+                <div id="international" class="flex items-center space-x-2">
+                  <img src="img/check.png" alt="Check icon" class="w-4 h-4">
+                  <div class="text-xs text-gray-700 pb-0.5">ผู้สมัครที่จบจาก รร. หลักสูตรนานาชาติ</div>
+                </div>
+
+                <div id="vocation" class="flex items-center space-x-2">
+                  <img src="img/check.png" alt="Check icon" class="w-4 h-4">
+                  <div class="text-xs text-gray-700 pb-0.5">ผู้สมัครที่จบจาก รร. หลักสูตรอาชีวศึกษา</div>
+                </div>
+
+                <div id="nfe" class="flex items-center space-x-2">
+                  <img src="img/check.png" alt="Check icon" class="w-4 h-4">
+                  <div class="text-xs text-gray-700 pb-0.5">ผู้สมัครที่จบจาก รร. หลักสูตรตามอัธยาศัย (กศน.)</div>
+                </div>
+
+                <div id="ged" class="flex items-center space-x-2">
+                  <img src="img/check.png" alt="Check icon" class="w-4 h-4">
+                  <div class="text-xs text-gray-700 pb-0.5">ผู้สมัครที่จบหลักสูตร GED</div>
+                </div>
+
+        </div>
+</body>
+</html>

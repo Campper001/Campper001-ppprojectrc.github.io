@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPTCAS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="js/salM.js"></script>
+    <script defer src="js/calm.js"></script>
+    <style>
+        @layer utilities {
+          .text-stroke {
+              text-shadow: 
+                -1px -1px 0 #000,  
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+          }
+          .min div.block {
+              background-color: #f0f4f8;
+              padding: 8px;
+              margin-top: 4px;
+              border-left: 4px solid #f97316;
+          }
+          .CONdi div.block {
+              background-color: #f0f4f8;
+              padding: 8px;
+              margin-top: 4px;
+              border-left: 4px solid #f97316;
+          }
+          .CORE div.block {
+              background-color: #f0f4f8;
+              padding: 8px;
+              margin-top: 4px;
+              border-left: 4px solid #f97316;
+          }
+           .custom-td {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            grid-template-rows: repeat(2);
+            height: 100%;
+        }
+           .top-content {
+            font-weight: bold;
+            font-size: 1rem; /* ปรับขนาดตัวเลขให้ใหญ่ */
+            color: #f97316; /* สีส้มเหมือนในภาพ */
+        }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-4 right-4 bg-orange-500 text-white p-3 rounded-full shadow-lg hover:bg-orange-600 transition">
+        <img src="img/goup.svg" alt="Scroll to Top" class="w-6 h-6">
+    </button>
+
+    <div id="calBox" class="cal pb-5">
+        <div class="mx-auto max-w-lg rounded-lg bg-white p-6 shadow-lg">
+            <div class="mb-4 flex items-center justify-between">
+                <h2 class="rounded-md bg-red-400 p-2 text-lg font-bold text-black">Score_Admission</h2>
+                <a href="index.html">
+                    <img class="bg-red-500 rounded" src="img/main.svg" alt="">
+                </a>
+            </div>
+
+            <div id="calContent">
+                <p class="mb-4 text-xs text-gray-500">*กรุณากรอกเป็น T-Score</p>
+                <p class="opacity-65 mb-5 sm:hidden">- - - - - - - - - - - - - - - - - -  - - - - - - - - -</p>
+                <p class="opacity-65 mb-5 hidden sm:block">- - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - -</p>
+
+                <!-- GPAX -->
+                <div class="mb-4">
+                    <label for="gpx" class="block font-bold text-xl underline text-orange-600">GPAX</label>
+                    <p class="text-gray-500 opacity-65 pb-2 text-xs pt-0.5">สูงสุด 4.00*</p>
+                    <input type="number" id="ingpx" step="0.01" max="4.00" min="0.00" placeholder="4.00" class="peer w-1/2 rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                </div>
+
+                <!-- TGAT -->
+                <div class="mb-4">
+                    <label class="block font-bold text-xl underline text-orange-600">TGAT ความถนัดทั่วไป</label>
+                    <div class="text-gray-500 opacity-65 pb-2 text-xs pt-0.5"><p>คะแนนเต็ม 100 คะแนน/พาร์ท*</p></div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label for="Tgat1" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TGAT1-อังกฤษ</label>
+                            <input type="number" id="inTgat1" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="Tgat2" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TGAT2-คิดเหตุผล</label>
+                            <input type="number" id="inTgat2" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <div>
+                            <label for="Tgat3" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TGAT3-สมรรถนะ</label>
+                            <input type="number" id="inTgat3" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TPAT -->
+                <div class="mb-4">
+                    <label class="block font-bold text-xl underline text-orange-600">TPAT 1-5 ความถนัดเฉพาะทาง</label>
+                    <div class="text-gray-500 opacity-65 pb-2 text-xs pt-0.5"><p>คะแนนเต็ม 100 คะแนน/พาร์ท*</p></div>
+                    <div class="grid grid-cols-3 gap-2 gap-y-4">
+                        <div>
+                            <label for="Tpat1" class="block text-[10px] sm:text-xs text-gray-700 bg-white pb-0.5 mb-1 peer-focus:text-red-500 font-medium">TPAT1-เชาว์</label>
+                            <input type="number" id="inTpat1" placeholder="100.00" class="block peer w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:border-red-500 focus:text-red-500 focus:font-bold transition-colors duration-300 placeholder-gray-500 placeholder-opacity-65 placeholder:text-lg" />
+                        </div>
+                        <!-- เพิ่ม input อื่น ๆ สำหรับ TPAT ตามเดิม -->
+                    </div>
+                </div>
+
+                <!-- A-Level -->
+                <div class="mb-4">
+                    <label class="block font-bold text-xl underline text-orange-600 Bien
+
+                    <!-- เพิ่ม input อื่น ๆ สำหรับ A-Level ตามเดิม -->
+                </div>
+
+                <div class="flex m-4">
+                    <button onclick="savedata()" class="w-full rounded-md bg-green-700 py-2 text-white hover:bg-green-600 duration-300 mx-2">บันทึก</button>
+                    <button onclick="setdata()" class="w-full rounded-md bg-red-700 py-2 text-white hover:bg-red-600 duration-300 mx-2">รีเซ็ท</button>
+                </div>
+            </div>
+            <div class="small text-xs flex justify-center pt-5 cursor-pointer">
+                <p onclick="toggleCal()">ย่อหน้าต่าง 🠕</p>
+            </div>
+        </div>
+
+        <div class="max-w-lg mx-auto bg-white p-6 shadow-lg">
+        <div class="bg-orange-900 text-white py-2 px-4 rounded-t-md font-bold">
+            เลือกโปรแกรมคำนวณที่ต้องการ
+        </div>
+        <div class="mt-4">
+            <form id="UNform" method="POST" action="">
+                <div class="mt-4">
+                    <label class="block font-medium text-xs">เลือกมหาวิทยาลัย:</label>
+                    <select id="UN" name="UN" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-orange-500">
+                        <option value="" disabled selected>เลือกมหาวิทยาลัย</option>
+                    </select>
+                </div>
+                    <button type="submit" class="w-full rounded-md bg-orange-500 py-2 text-white hover:bg-orange-600 duration-300">ส่งตรวจเช็คข้อมูล</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+                <h2 class="text-lg font-semibold mb-4">เลือกคณะที่สนใจ</h2>
+                <input type="text" id="search" placeholder="ค้นหาคณะ..." class="w-full p-2 border border-gray-300 rounded-md mb-2">
+                <div class="max-h-60 overflow-y-auto border rounded-md">
+                    <ul id="facultyList" class="p-2"></ul>
+                </div>
+                <button class="mt-4 bg-red-500 text-white px-4 py-2 rounded-md w-full" onclick="closeModal()">ปิด</button>
+            </div>
+        </div>
+
+        <div id="GG" class="max-w-lg mx-auto bg-white p-6 shadow-lg mt-5 rounded-lg w-auto hidden">
+            <!-- ส่วนแสดงผลเหมือนเดิม -->
+        </div>
+
+        <script>
+    // เริ่มต้น Supabase client
+    const { createClient } = supabase;
+    const supabaseClient = createClient('https://yfhpedtabfdyvoriqpzw.supabase.co', 'YOUR_ANON_KEY'); // แทนที่ด้วย Anon Key จริง
+
+    // ข้อมูลมหาวิทยาลัย
+    const universityData = {
+        NU: { name: 'มหาวิทยาลัยนเรศวร', logo: 'imgu/Nu.png' },
+        CU: { name: 'จุฬาลงกรณ์มหาวิทยาลัย', logo: 'imgu/chula2.png' },
+        KKU: { name: 'มหาวิทยาลัยขอนแก่น', logo: 'imgu/KKU.png' },
+        KMUTNB: { name: 'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ', logo: 'imgu/KMUTNB.png' }
+    };
+
+    // ฟังก์ชันดึงข้อมูลมหาวิทยาลัย
+    async function loadUniversities() {
+        try {
+            const { data, error } = await supabaseClient
+                .from('admission_rcttest')
+                .select('UN')
+                .is('UN', null, false)
+                .order('UN');
+
+            if (error) {
+                console.error('Error loading universities:', error);
+                alert('เกิดข้อผิดพลาดในการโหลดข้อมูลมหาวิทยาลัย');
+                return;
+            }
+
+            const unSelect = document.getElementById('UN');
+            unSelect.innerHTML = '<option value="" disabled selected>เลือกมหาวิทยาลัย</option>';
+
+            const uniqueUniversities = [...new Set(data.map(item => item.UN))];
+            uniqueUniversities.forEach(un => {
+                const option = document.createElement('option');
+                option.value = un;
+                option.textContent = universityData[un]?.name || un;
+                unSelect.appendChild(option);
+            });
+        } catch (err) {
+            console.error('Unexpected error:', err);
+            alert('เกิดข้อผิดพลาดที่ไม่คาดคิด');
+        }
+    }
+
+    // เรียกเมื่อหน้าเว็บโหลด
+    document.addEventListener('DOMContentLoaded', loadUniversities);
+</script>
+</body>
+</html>
